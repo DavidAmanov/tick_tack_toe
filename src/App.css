@@ -2,3 +2,13 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
+.feild{
+  width: 500px;
+  height: 500px;
+  border: solid;
+  border-color: red;
+  border-radius: 3%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+}
