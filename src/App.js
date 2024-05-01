@@ -20,11 +20,27 @@ import { useState } from 'react';
 
 
 function App() {
+  const [flagDragX, setFlagDragX] = useState(true);
+  const [flagDragO, setFlagDragO] = useState(true);
   const [scoreValueX, setScoreValueX] = useState(0);
   const [scoreValueO, setScoreValueO] = useState(0);
+
+  function stepCount(value){
+    if(value==='X'){
+      setScoreValueX(scoreValueX+1);
+      setFlagDragX(false);
+      setFlagDragO(true);
+    }else{
+      setScoreValueO(scoreValueO+1);
+      setFlagDragX(true);
+      setFlagDragO(false);
+    }
+  }
+  //you need end up with stepCount func
   function changeScore(value){
     if(value==='X'){
       setScoreValueX(scoreValueX+1);
+      
     }else{
       setScoreValueO(scoreValueO+1);
     }
@@ -63,6 +79,7 @@ function App() {
       setFieldValue(newField);
       setDraggingItem(null);
       console.log(fieldValue)
+      stepCount(draggingItem.name)
 
       if(fieldValue[0].value=== 'X' && fieldValue[1].value=== 'X' && fieldValue[2].value=== 'X'
         || fieldValue[0].value=== 'O' && fieldValue[1].value=== 'O' && fieldValue[2].value=== 'O'){
@@ -126,10 +143,10 @@ function App() {
       </div>
       <div className='X_O_blocks'>
       <Score x={scoreValueX} o={scoreValueO}/>
-      <div className='drag-block' draggable onDragStart={()=>handleDragStart({name: 'X', color: 'green'})}>
+      <div className='drag-block' draggable={flagDragX} onDragStart={()=>handleDragStart({name: 'X', color: 'green'})}>
         <Block name={'X'} color={'green'} />
       </div>
-      <div className='drag-block' draggable onDragStart={()=>handleDragStart({name: 'O', color: 'orange'})}>
+      <div className='drag-block' draggable={flagDragO} onDragStart={()=>handleDragStart({name: 'O', color: 'orange'})}>
         <Block name={'O'} color={'orange'} />
       </div>
       </div>
